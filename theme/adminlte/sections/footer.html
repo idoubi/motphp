@@ -1,0 +1,10 @@
+<footer class="main-footer">
+    {% if system.version %}
+    <div class="float-right d-none d-sm-block">
+        <b>Version</b> {{ system.version }}
+    </div>
+    {% endif %}
+    {% if system.copyright %}
+        {{ system.copyright|raw }}
+    {% endif %}
+</footer>

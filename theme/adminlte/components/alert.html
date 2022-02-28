@@ -1,0 +1,21 @@
+<style>
+    #success-tip,
+    #error-tip {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        margin-left: -300px;
+        width: 600px;
+        z-index: 999999;
+    }
+</style>
+<div id="success-tip" class="alert alert-success alert-dismissible" style="display: none">
+    <button type="button" class="close">×</button>
+    <h4><i class="icon fa fa-check"></i> Success</h4>
+    <p class="tip">&nbsp;</p>
+</div>
+<div id="error-tip" class="alert alert-warning alert-dismissible" style="display: none">
+    <button type="button" class="close">×</button>
+    <h4><i class="icon fa fa-warning"></i> Error</h4>
+    <p class="tip">&nbsp;</p>
+</div>

@@ -1,0 +1,424 @@
+<html lang="en" data-redeviation-bs-uid="89596" style="height: auto;">
+
+{% include "components/head.html" %}
+
+<body class="sidebar-mini" style="height: auto;">
+    <div class="wrapper">
+        {% include("components/alert.html") %}
+
+        {% include("sections/header.html") %}
+
+        {% include("sections/aside.html") %}
+
+        <div class="content-wrapper" style="min-height: 1302.12px;">
+
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <div class="row" style="margin-left: 0px;">
+                                {% if goback_url %}
+                                <a href="{{ goback_url }}" class="btn btn-primary" type="button"
+                                    style="color:#fff;margin-right: 10px;margin-left: 7.5px;margin-top: 4px;"><i
+                                        class="fa fa-chevron-left"></i></a>
+                                {% endif %}
+                                <h1>{{ title }}</h1>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            {% include "components/crumb.html" %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                {% if tabnav %}
+                                <div class="card-header p-0 border-bottom-0">
+                                    {% include "components/tabnav.html" %}
+                                </div>
+                                {% endif %}
+
+                                <div class="card-body">
+                                    {% include "components/toolbar.html" %}
+
+                                    {% block content %}{% endblock %}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+        {% include("sections/footer.html") %}
+
+        <aside class="control-sidebar control-sidebar-dark" style="display: none;">
+
+            <div class="p-3 control-sidebar-content" style="">
+                <h5>Customize AdminLTE</h5>
+                <hr class="mb-2">
+                <div class="mb-4"><input type="checkbox" value="1" class="mr-1"><span>Dark Mode</span></div>
+                <h6>Header Options</h6>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Fixed</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Dropdown Legacy Offset</span>
+                </div>
+                <div class="mb-4"><input type="checkbox" value="1" class="mr-1"><span>No border</span></div>
+                <h6>Sidebar Options</h6>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Collapsed</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Fixed</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" checked="checked" class="mr-1"><span>Sidebar
+                        Mini</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Sidebar Mini MD</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Sidebar Mini XS</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Nav Flat Style</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Nav Legacy Style</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Nav Compact</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Nav Child Indent</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Nav Child Hide on Collapse</span>
+                </div>
+                <div class="mb-4"><input type="checkbox" value="1" class="mr-1"><span>Disable Hover/Focus
+                        Auto-Expand</span></div>
+                <h6>Footer Options</h6>
+                <div class="mb-4"><input type="checkbox" value="1" class="mr-1"><span>Fixed</span></div>
+                <h6>Small Text Options</h6>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Body</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Navbar</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Brand</span></div>
+                <div class="mb-1"><input type="checkbox" value="1" class="mr-1"><span>Sidebar Nav</span></div>
+                <div class="mb-4"><input type="checkbox" value="1" class="mr-1"><span>Footer</span></div>
+                <h6>Navbar Variants</h6>
+                <div class="d-flex"><select class="custom-select mb-3 text-light border-0 bg-white">
+                        <option class="bg-primary">Primary</option>
+                        <option class="bg-secondary">Secondary</option>
+                        <option class="bg-info">Info</option>
+                        <option class="bg-success">Success</option>
+                        <option class="bg-danger">Danger</option>
+                        <option class="bg-indigo">Indigo</option>
+                        <option class="bg-purple">Purple</option>
+                        <option class="bg-pink">Pink</option>
+                        <option class="bg-navy">Navy</option>
+                        <option class="bg-lightblue">Lightblue</option>
+                        <option class="bg-teal">Teal</option>
+                        <option class="bg-cyan">Cyan</option>
+                        <option class="bg-dark">Dark</option>
+                        <option class="bg-gray-dark">Gray dark</option>
+                        <option class="bg-gray">Gray</option>
+                        <option class="bg-light">Light</option>
+                        <option class="bg-warning">Warning</option>
+                        <option class="bg-white">White</option>
+                        <option class="bg-orange">Orange</option>
+                    </select></div>
+                <h6>Accent Color Variants</h6>
+                <div class="d-flex"></div><select class="custom-select mb-3 border-0">
+                    <option>None Selected</option>
+                    <option class="bg-primary">Primary</option>
+                    <option class="bg-warning">Warning</option>
+                    <option class="bg-info">Info</option>
+                    <option class="bg-danger">Danger</option>
+                    <option class="bg-success">Success</option>
+                    <option class="bg-indigo">Indigo</option>
+                    <option class="bg-lightblue">Lightblue</option>
+                    <option class="bg-navy">Navy</option>
+                    <option class="bg-purple">Purple</option>
+                    <option class="bg-fuchsia">Fuchsia</option>
+                    <option class="bg-pink">Pink</option>
+                    <option class="bg-maroon">Maroon</option>
+                    <option class="bg-orange">Orange</option>
+                    <option class="bg-lime">Lime</option>
+                    <option class="bg-teal">Teal</option>
+                    <option class="bg-olive">Olive</option>
+                </select>
+                <h6>Dark Sidebar Variants</h6>
+                <div class="d-flex"></div><select class="custom-select mb-3 text-light border-0 bg-primary">
+                    <option>None Selected</option>
+                    <option class="bg-primary">Primary</option>
+                    <option class="bg-warning">Warning</option>
+                    <option class="bg-info">Info</option>
+                    <option class="bg-danger">Danger</option>
+                    <option class="bg-success">Success</option>
+                    <option class="bg-indigo">Indigo</option>
+                    <option class="bg-lightblue">Lightblue</option>
+                    <option class="bg-navy">Navy</option>
+                    <option class="bg-purple">Purple</option>
+                    <option class="bg-fuchsia">Fuchsia</option>
+                    <option class="bg-pink">Pink</option>
+                    <option class="bg-maroon">Maroon</option>
+                    <option class="bg-orange">Orange</option>
+                    <option class="bg-lime">Lime</option>
+                    <option class="bg-teal">Teal</option>
+                    <option class="bg-olive">Olive</option>
+                </select>
+                <h6>Light Sidebar Variants</h6>
+                <div class="d-flex"></div><select class="custom-select mb-3 border-0">
+                    <option>None Selected</option>
+                    <option class="bg-primary">Primary</option>
+                    <option class="bg-warning">Warning</option>
+                    <option class="bg-info">Info</option>
+                    <option class="bg-danger">Danger</option>
+                    <option class="bg-success">Success</option>
+                    <option class="bg-indigo">Indigo</option>
+                    <option class="bg-lightblue">Lightblue</option>
+                    <option class="bg-navy">Navy</option>
+                    <option class="bg-purple">Purple</option>
+                    <option class="bg-fuchsia">Fuchsia</option>
+                    <option class="bg-pink">Pink</option>
+                    <option class="bg-maroon">Maroon</option>
+                    <option class="bg-orange">Orange</option>
+                    <option class="bg-lime">Lime</option>
+                    <option class="bg-teal">Teal</option>
+                    <option class="bg-olive">Olive</option>
+                </select>
+                <h6>Brand Logo Variants</h6>
+                <div class="d-flex"></div><select class="custom-select mb-3 border-0">
+                    <option>None Selected</option>
+                    <option class="bg-primary">Primary</option>
+                    <option class="bg-secondary">Secondary</option>
+                    <option class="bg-info">Info</option>
+                    <option class="bg-success">Success</option>
+                    <option class="bg-danger">Danger</option>
+                    <option class="bg-indigo">Indigo</option>
+                    <option class="bg-purple">Purple</option>
+                    <option class="bg-pink">Pink</option>
+                    <option class="bg-navy">Navy</option>
+                    <option class="bg-lightblue">Lightblue</option>
+                    <option class="bg-teal">Teal</option>
+                    <option class="bg-cyan">Cyan</option>
+                    <option class="bg-dark">Dark</option>
+                    <option class="bg-gray-dark">Gray dark</option>
+                    <option class="bg-gray">Gray</option>
+                    <option class="bg-light">Light</option>
+                    <option class="bg-warning">Warning</option>
+                    <option class="bg-white">White</option>
+                    <option class="bg-orange">Orange</option><a href="#">clear</a>
+                </select>
+            </div>
+        </aside>
+
+        <div id="sidebar-overlay"></div>
+    </div>
+
+
+    <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
+    <!-- 
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/jszip/jszip.min.js"></script>
+    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script> -->
+
+    <!-- <script src="/static/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js"></script> -->
+    <script src="/static/js/adminlte.min.js?v=3.2.0"></script>
+
+    <script src="/static/js/demo.js"></script>
+
+    <script>
+        // $(function () {
+        //     $("#example1").DataTable({
+        //         "responsive": true,
+        //         "lengthChange": false,
+        //         "autoWidth": false,
+        //         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        //     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        //     $('#example2').DataTable({
+        //         "paging": true,
+        //         "lengthChange": false,
+        //         "searching": false,
+        //         "ordering": true,
+        //         "info": true,
+        //         "autoWidth": false,
+        //         "responsive": true,
+        //     });
+        // });
+    </script>
+
+    {% block script %}
+
+    {% endblock %}
+
+
+    <audio controls="controls" style="display: none;"></audio>
+    <div>
+        <div
+            style="display: none; position: fixed; top: 30px; width: auto; max-width: 100%; text-align: center; left: 50%; transform: translateX(-50%); z-index: 99999999;">
+            <div
+                style="display: inline-block; font-size: 14px; font-weight: bold; border: 1px solid rgb(240, 195, 109); background-color: rgb(249, 237, 190); padding: 0px 10px; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;">
+            </div>
+        </div>
+    </div><iframe id="redeviation-bs-sidebar" class="notranslate" aria-hidden="true" data-theme="default"
+        data-pos="left"></iframe>
+    <div id="redeviation-bs-indicator" data-theme="default" class="redeviation-bs-fullHeight redeviation-bs-visible"
+        data-pos="left" style="height: 100%; top: 0%;">
+        <div><span></span></div>
+    </div>
+</body>
+<style type="text/css">
+    #yddContainer {
+        display: block;
+        font-family: Microsoft YaHei;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        top: -4px;
+        left: -4px;
+        font-size: 12px;
+        border: 1px solid
+    }
+
+    #yddTop {
+        display: block;
+        height: 22px
+    }
+
+    #yddTopBorderlr {
+        display: block;
+        position: static;
+        height: 17px;
+        padding: 2px 28px;
+        line-height: 17px;
+        font-size: 12px;
+        color: #5079bb;
+        font-weight: bold;
+        border-style: none solid;
+        border-width: 1px
+    }
+
+    #yddTopBorderlr .ydd-sp {
+        position: absolute;
+        top: 2px;
+        height: 0;
+        overflow: hidden
+    }
+
+    .ydd-icon {
+        left: 5px;
+        width: 17px;
+        padding: 0px 0px 0px 0px;
+        padding-top: 17px;
+        background-position: -16px -44px
+    }
+
+    .ydd-close {
+        right: 5px;
+        width: 16px;
+        padding-top: 16px;
+        background-position: left -44px
+    }
+
+    #yddKeyTitle {
+        float: left;
+        text-decoration: none
+    }
+
+    #yddMiddle {
+        display: block;
+        margin-bottom: 10px
+    }
+
+    .ydd-tabs {
+        display: block;
+        margin: 5px 0;
+        padding: 0 5px;
+        height: 18px;
+        border-bottom: 1px solid
+    }
+
+    .ydd-tab {
+        display: block;
+        float: left;
+        height: 18px;
+        margin: 0 5px -1px 0;
+        padding: 0 4px;
+        line-height: 18px;
+        border: 1px solid;
+        border-bottom: none
+    }
+
+    .ydd-trans-container {
+        display: block;
+        line-height: 160%
+    }
+
+    .ydd-trans-container a {
+        text-decoration: none;
+    }
+
+    #yddBottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 22px;
+        line-height: 22px;
+        overflow: hidden;
+        background-position: left -22px
+    }
+
+    .ydd-padding010 {
+        padding: 0 10px
+    }
+
+    #yddWrapper {
+        color: #252525;
+        z-index: 10001;
+        background: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);
+    }
+
+    #yddContainer {
+        background: #fff;
+        border-color: #4b7598
+    }
+
+    #yddTopBorderlr {
+        border-color: #f0f8fc
+    }
+
+    #yddWrapper .ydd-sp {
+        background-image: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)
+    }
+
+    #yddWrapper a,
+    #yddWrapper a:hover,
+    #yddWrapper a:visited {
+        color: #50799b
+    }
+
+    #yddWrapper .ydd-tabs {
+        color: #959595
+    }
+
+    .ydd-tabs,
+    .ydd-tab {
+        background: #fff;
+        border-color: #d5e7f3
+    }
+
+    #yddBottom {
+        color: #363636
+    }
+
+    #yddWrapper {
+        min-width: 250px;
+        max-width: 400px;
+    }
+</style>
+
+</html>

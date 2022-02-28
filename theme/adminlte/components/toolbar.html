@@ -1,0 +1,19 @@
+<style>
+    .toolbar {
+        margin-bottom: 10px;
+    }
+
+    .toolbar .btn {
+        margin-right: 10px;
+    }
+</style>
+
+<div class="toolbar">
+    {% for item in toolbar %}
+    <a href="{{ item.url|default('javascript:;') }}" type="button"
+        class="btn btn-inline btn-{{ item.class|default('primary') }}" {{ item.attr }}>
+        <i class="fa fa-{{ item.icon }}"></i>
+        {{ item.title }}
+    </a>
+    {% endfor %}
+</div>

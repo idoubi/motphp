@@ -1,0 +1,10 @@
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+    </li>
+    {% for nav in headnav %}
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ nav.url | default('javascript:;') }}" class="nav-link">{{ nav.title }}</a>
+    </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,10 @@
+<ul class="nav nav-tabs" style="margin: 10px 20px 0">
+    {% for item in tabnav %}
+    <li class="nav-item">
+        <a class="nav-link{% if item.active %} active{% endif %}" href="{{ item.url|default('javascript:;') }}"
+            target="{{ item.target|default('_self') }}" {{ item.attr }}>
+            {{ item.title }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>

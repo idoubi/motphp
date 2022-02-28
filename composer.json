@@ -1,0 +1,38 @@
+{
+    "name": "motphp/mot",
+    "description": "A low-code framework for building web application.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "mot\\": "src"
+        },
+        "files": [
+            "src/helper.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "idoubi",
+            "email": "me@idoubi.cc"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "slim/slim": "^4.8",
+        "slim/psr7": "^1.4",
+        "slim/twig-view": "^3.2",
+        "illuminate/database": "^7.30",
+        "php-di/php-di": "^6.3",
+        "selective/config": "^1.1",
+        "symfony/http-foundation": "^6.0",
+        "vlucas/valitron": "^1.4",
+        "illuminate/pagination": "^7.0",
+        "twig/twig": "^3.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
+    }
+}

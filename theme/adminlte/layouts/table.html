@@ -1,0 +1,82 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+    <div class="row">
+        <div class="col-sm-12 col-md-6"></div>
+        <div class="col-sm-12 col-md-6"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid"
+                aria-describedby="example2_info">
+                <thead>
+                    <tr role="row">
+                        {% for column in table_columns %}
+                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                            aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                            {{ column.title }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in table_items %}
+                    <tr class="odd">
+                        {% for column in item %}
+                        <td>
+
+                            {% if column.type == 'label' %}
+                            <span
+                                class="badge bg-{{ column.label.class|default('primary') }}">{{ column.content }}</span>
+
+                            {% elseif column.type == 'image' %}
+                            <img src="{{ column.content|default(column.placeholder) }}" class="img-fluid mb-2"
+                                width="{{ column.image.width|default(100) }}"
+                                height="{{ column.image.height|default('100') }}" style="{{ column.style }}" />
+
+                            {% elseif column.type == 'toolbar' %}
+                            {% for item in column.options %}
+                            <a class="btn btn-{{ item.class|default('primary') }} btn-sm"
+                                href="{{ item.url|default('javascript:;') }}">
+                                <i class="fa fa-{{ item.icon|default('') }}">
+                                </i>
+                                {{ item.title }}
+                            </a>
+                            {% endfor %}
+
+                            {% elseif column.type == 'actionbar' %}
+                            <div class="btn-group show">
+                                <button type="button" class="btn btn-default">操作</button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="true">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu" x-placement="bottom-start"
+                                    style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(68px, 38px, 0px);">
+                                    {% for item in column.options %}
+                                    <a class="dropdown-item"
+                                        href="{{ item.url|default('javascript:;') }}">{{ item.title }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            {% else %}
+                            <div style="white-space: pre-line;">
+                                {{ column.content|raw }}
+                            </div>
+
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    {% include "components/paginate.html" %}
+</div>
+{% endblock %}

@@ -1,0 +1,170 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title | default('mot') }}</title>
+
+    <!-- <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css"> -->
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/admin-lte/3.2.0/css/adminlte.min.css">
+    <!-- <script defer=""
+        src="/cdn-cgi/zaraz/s.js?z=JTdCJTIyZXhlY3V0ZWQlMjIlM0ElNUIlNUQlMkMlMjJ0cmFja3MlMjIlM0ElNUIlNUQlMkMlMjJjJTIyJTNBJTIyX2dhJTNEOGE5ZmM4NmMtZjcwYy00ZmYwLWIzOTktZTlmMDFkNzFhMTAyJTIyJTJDJTIydCUyMiUzQSUyMkFkbWluTFRFJTIwMyUyMCU3QyUyMERhdGFUYWJsZXMlMjIlMkMlMjJ3JTIyJTNBMTkyMCUyQyUyMmglMjIlM0ExMDgwJTJDJTIyaiUyMiUzQTEwMDElMkMlMjJlJTIyJTNBMTM2NSUyQyUyMmwlMjIlM0ElMjJodHRwcyUzQSUyRiUyRmFkbWlubHRlLmlvJTJGdGhlbWVzJTJGdjMlMkZwYWdlcyUyRnRhYmxlcyUyRmRhdGEuaHRtbCUyMiUyQyUyMnIlMjIlM0ElMjJodHRwcyUzQSUyRiUyRmFkbWlubHRlLmlvJTJGdGhlbWVzJTJGdjMlMkZwYWdlcyUyRnRhYmxlcyUyRmpzZ3JpZC5odG1sJTIyJTJDJTIyayUyMiUzQTI0JTJDJTIybiUyMiUzQSUyMlVURi04JTIyJTJDJTIybyUyMiUzQS00ODAlN0Q=">
+    </script>
+    <script>
+        (function (w, d) {
+            ! function (a, e, t, r, z) {
+                a.zarazData = a.zarazData || {}, a.zarazData.executed = [], a.zarazData.tracks = [], a.zaraz = {
+                    deferred: []
+                };
+                var s = e.getElementsByTagName("title")[0];
+                a.zarazData.c = e.cookie, s && (a.zarazData.t = e.getElementsByTagName("title")[0].text), a
+                    .zarazData.w = a.screen.width, a.zarazData.h = a.screen.height, a.zarazData.j = a.innerHeight, a
+                    .zarazData.e = a.innerWidth, a.zarazData.l = a.location.href, a.zarazData.r = e.referrer, a
+                    .zarazData.k = a.screen.colorDepth, a.zarazData.n = e.characterSet, a.zarazData.o = (new Date)
+                    .getTimezoneOffset(), //
+                    a.dataLayer = a.dataLayer || [], a.zaraz.track = (e, t) => {
+                        for (key in a.zarazData.tracks.push(e), t) a.zarazData["z_" + key] = t[key]
+                    }, a.zaraz._preSet = [], a.zaraz.set = (e, t, r) => {
+                        a.zarazData["z_" + e] = t, a.zaraz._preSet.push([e, t, r])
+                    }, a.dataLayer.push({
+                        "zaraz.start": (new Date).getTime()
+                    }), a.addEventListener("DOMContentLoaded", (() => {
+                        var t = e.getElementsByTagName(r)[0],
+                            z = e.createElement(r);
+                        z.defer = !0, z.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON
+                            .stringify(a.zarazData))), t.parentNode.insertBefore(z, t)
+                    }))
+            }(w, d, 0, "script");
+        })(window, document);
+    </script> -->
+    <style class="redeviation-bs-style" data-name="content">
+        /*! (c) Philipp König under GPL-3.0 */
+        body>div#redeviation-bs-indicator>div {
+            opacity: 0;
+            pointer-events: none
+        }
+
+        body>iframe#redeviation-bs-sidebar.redeviation-bs-visible,
+        body>iframe#redeviation-bs-overlay.redeviation-bs-visible {
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        body.redeviation-bs-noscroll {
+            overflow: hidden !important
+        }
+
+        body>div#redeviation-bs-indicator>div {
+            position: absolute;
+            transform: translate3d(-24px, 0, 0);
+            top: 0;
+            left: 0;
+            width: 24px !important;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 0 10px 10px 0;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 2
+        }
+
+        body>div#redeviation-bs-indicator>div>span {
+            -webkit-mask: no-repeat center/24px;
+            -webkit-mask-image: url(chrome-extension://jdbnofccmhefkmjbkkdkfiicjkgofkdh/img/icon-bookmark.svg);
+            background-color: #ffffff;
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%
+        }
+
+        body>div#redeviation-bs-indicator[data-pos='right'] {
+            left: auto;
+            right: 0
+        }
+
+        body>div#redeviation-bs-indicator[data-pos='right']>div {
+            transform: translate3d(24px, 0, 0);
+            left: auto;
+            right: 0;
+            border-radius: 10px 0 0 10px
+        }
+
+        body>div#redeviation-bs-indicator.redeviation-bs-fullHeight>div {
+            border-radius: 0
+        }
+
+        body>div#redeviation-bs-indicator.redeviation-bs-hover>div {
+            transform: translate3d(0, 0, 0);
+            opacity: 1
+        }
+
+        body>div#redeviation-bs-indicator[data-pos='left'].redeviation-bs-has-lsb {
+            height: 100% !important;
+            top: 0 !important
+        }
+
+        body>div#redeviation-bs-indicator[data-pos='left'].redeviation-bs-has-lsb>div {
+            background: transparent
+        }
+
+        body>div#redeviation-bs-indicator[data-pos='left'].redeviation-bs-has-lsb>div>span {
+            -webkit-mask-position-y: 20px
+        }
+
+        body>iframe#redeviation-bs-sidebar {
+            width: 350px;
+            max-width: none;
+            height: 0;
+            z-index: 2147483646;
+            background-color: rgba(0, 0, 0, 0.6) !important;
+            color-scheme: normal !important;
+            speak: none;
+            border: none;
+            display: block !important;
+            transform: translate3d(-350px, 0, 0);
+            transition: width 0s 0.3s, height 0s 0.3s, opacity 0.3s, transform 0.3s
+        }
+
+        body>iframe#redeviation-bs-sidebar[data-pos='right'] {
+            left: auto;
+            right: 0;
+            transform: translate3d(350px, 0, 0)
+        }
+
+        body>iframe#redeviation-bs-sidebar.redeviation-bs-visible {
+            width: calc(100% + 350px);
+            height: 100%;
+            transform: translate3d(0, 0, 0);
+            transition: opacity 0.3s, transform 0.3s
+        }
+
+        body>iframe#redeviation-bs-sidebar.redeviation-bs-hideMask {
+            background: none !important
+        }
+
+        body>iframe#redeviation-bs-sidebar.redeviation-bs-hideMask:not(.redeviation-bs-hover) {
+            width: calc(350px + 50px)
+        }
+
+        body>iframe#redeviation-bs-overlay {
+            width: 100%;
+            max-width: none;
+            height: 100%;
+            z-index: 2147483647;
+            border: none;
+            speak: none;
+            background: rgba(0, 0, 0, 0.5) !important;
+            transition: opacity 0.3s
+        }
+    </style>
+</head>

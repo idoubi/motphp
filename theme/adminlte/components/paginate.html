@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+            每页 {{ paginate.per_page }} 条， 共 {{ paginate.total }} 条</div>
+    </div>
+    {% if paginate.last_page > 1 %}
+    <div class="col-sm-12 col-md-7">
+        <div class="dataTables_paginate paging_simple_numbers">
+            <ul class="pagination" style="float: right;">
+                {% if paginate.prev_page_url %}
+                <li class="paginate_button page-item previous">
+                    <a href="{{ paginate.prev_page_url }}" class="page-link">Previous</a>
+                </li>
+                {% endif %}
+                {% for page in paginate.pages %}
+                <li class="paginate_button page-item{% if page.active %} active{% endif %}">
+                    <a href="{{ page.url }}" class="page-link">{{ page.num }}</a>
+                </li>
+                {% endfor %}
+                {% if paginate.next_page_url %}
+                <li class="paginate_button page-item next">
+                    <a href="{{ paginate.next_page_url }}" class="page-link">Next</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+</div>

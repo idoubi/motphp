@@ -1,0 +1,31 @@
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column nav-legacy text-md" data-widget="treeview" role="menu"
+        data-accordion="false">
+        {% for nav in sidenav %}
+        <li class="nav-item{% if nav.expand %} menu-open{% endif %}">
+            <a href="{{ nav.url | default('javascript:;') }}" class="nav-link{% if nav.active %} active{% endif %}">
+                <i class="nav-icon {{ nav.icon | default('fa fa-circle') }}"></i>
+                <p>
+                    {{ nav.title }}
+                    {% if nav.children %}
+                    <i class="right fas fa-angle-left"></i>
+                    {% endif %}
+                </p>
+            </a>
+            {% if nav.children %}
+            <ul class="nav nav-treeview">
+                {% for cnav in nav.children %}
+                <li class="nav-item">
+                    <a href="{{ cnav.url | default('javascript:;') }}"
+                        class="nav-link{% if cnav.active %} active{% endif %}">
+                        <i class="nav-icon {{ cnav.icon | default('fa') }}"></i>
+                        <p>{{ cnav.title }}</p>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</nav>

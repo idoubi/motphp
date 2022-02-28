@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="/static/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/adminlte.min.css?v=3.2.0">
+
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="javascript:/">{{ title }}</a>
+        </div>
+
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">{{ sub_title }}</p>
+                <form method="{{ login_submit.method|default('post') }}" action="{{ login_submit.url }}">
+                    {% for field in login_fields %}
+                    {% if field.type in ['', 'text', 'password', 'email'] %}
+                    <div class="input-group mb-3">
+                        <input type="{{ field.type|default('text') }}" class="form-control"
+                            placeholder="{{ field.title }}" name="{{ field.name }}" value="{{ field.value }}">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa fa-{{ field.icon|default('') }}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% elseif field.type == 'checkbox' %}
+                    <div class="row">
+                        <div class="col-8">
+                            {% for k, v in field.options %}
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="" name="{{ field.name }}" value="{{ k }}">
+                                <label for="remember">
+                                    {{ v }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% endfor %}
+
+                    {% if login_submit.button %}
+                    <div class="social-auth-links text-center mb-3">
+                        <button type="submit"
+                            class="btn btn-block btn-{{ login_submit.button.class|default('primary') }}">
+                            <i class="fa fa-{{ login_submit.button.icon|default('') }} mr-2"></i>
+                            {{ login_submit.button.title }}
+                        </button>
+                    </div>
+                    {% endif %}
+                </form>
+
+                {% for tip in login_tips %}
+                <p class="mb-1">
+                    <a href="{{ tip.url|default('javascript:;') }}">{{ tip.title }}</a>
+                </p>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="/static/plugins/jquery/jquery.min.js"></script>
+    <script src="/static/js/adminlte.min.js?v=3.2.0"></script>
+</body>
+
+</html>

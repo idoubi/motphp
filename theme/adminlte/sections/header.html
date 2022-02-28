@@ -1,0 +1,61 @@
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+    {% include("components/headnav.html") %}
+
+    <ul class="navbar-nav ml-auto">
+        <!-- Messages Dropdown Menu -->
+        {% if false %}
+        <li class="nav-item dropdown" style="margin-right: 5rem">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <img style="
+                height: 2rem;
+                width: 2rem;
+                border-radius: 1rem;
+                margin-right: 0.3rem;
+                margin-top: -0.3rem;
+              " src="{$topSelect.img|default='/static/img/default-150x150.png'}" alt="" />
+                <span>{$topSelect.title}</span>
+                {if $topSelect.children}
+                <i class="fas fa-list"></i>
+                {/if}
+                <!-- <span class="badge badge-danger navbar-badge">3</span> -->
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                {if $topSelect.children} {foreach $topSelect.children as $k => $v}
+                <a href="{$v.url}" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="{$v.img|default='/static/img/default-150x150.png'}" alt=""
+                            class="img-size-50 mr-3 img-circle" />
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title" style="padding: 1rem 0rem">
+                                {$v.title}
+                                <span class="float-right text-sm text-danger"><i class="fas {$v.icon}"></i></span>
+                            </h3>
+                            <!-- <p class="text-sm">{$v.desc}</p> -->
+                            <!-- <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>  -->
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                {/foreach}{/if} {if $topSelect.bottom}
+                <a href="{$topSelect.bottom.url}" class="dropdown-item dropdown-footer">{$topSelect.bottom.title}</a>
+                {/if}
+            </div>
+        </li>
+        {% endif %}
+        <!-- Notifications Dropdown Menu -->
+
+        {% if user %}
+        {% include("components/user.html") %}
+        {% endif %}
+
+        <!-- <li class="nav-item">
+                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                    <i class="fas fa-th-large"></i>
+                </a>
+            </li> -->
+    </ul>
+
+</nav>

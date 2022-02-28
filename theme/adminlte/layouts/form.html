@@ -1,0 +1,115 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<form method="{{ form_submit.method|default('post') }}" action="{{ form_submit.url }}" novalidate="novalidate">
+    <div class="card-body col-md-8">
+        {% for field in form_fields %}
+        <div class="form-group">
+            <label for="">{{ field.title }}
+                {% if field.required %}
+                <span style="color: #dc3545;">*</span>
+                {% endif %}
+            </label>
+            {% if field.type in ['email','number','password'] %}
+            <input type="{{ field.type }}" name="{{ field.name }}" class="form-control"
+                placeholder="{{ field.placeholder }}" value="{{ field.value }}">
+
+            {% elseif field.type == 'textarea' %}
+            <textarea name="{{ field.name }}" class="form-control" placeholder="{{ field.placeholder }}"
+                rows="{{ field.rows|default(6) }}">{{ field.value }}</textarea>
+
+            {% elseif field.type == 'radio' %}
+            <div class="form-group clearfix">
+                {% for k, v in field.options %}
+                <div class="icheck-primary d-inline">
+                    <input type="radio" id="" name="{{ field.name }}" value="{{ k }}"
+                        {% if field.value == k %}checked{% endif %}>
+                    <label for="">
+                        {{ v }}
+                    </label>
+                </div>
+                &nbsp;
+                {% endfor %}
+            </div>
+
+
+            {% else %}
+            <input type="text" name="{{ field.name }}" class="form-control" id="" placeholder="{{ field.placeholder }}"
+                value="{{ field.value }}">
+
+            {% endif %}
+            <div class="form-text">{{ field.tip|raw }}</div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary ajax-post">提交</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block script %}
+<script>
+    $('.icheck-primary').on('click', function () {
+        var input = $(this).find('input');
+        var name = input.attr('name');
+        $('input[name="' + name + '"]').removeAttr('checked');
+        input.attr('checked', true);
+    });
+
+    $('.ajax-post').on('click', submit);
+
+    function submit() {
+        var data = $('form').serialize();
+        var url = $('form').attr('action');
+        $.ajax({
+            'url': url,
+            'type': 'post',
+            'dataType': 'json',
+            'data': data,
+            success: function (res) {
+                if (res.code == 0) {
+                    $('#success-tip .tip').html(res.message);
+                    $('#success-tip').slideDown();
+                    $('#success-tip .close').click(function () {
+                        $('#success-tip').slideUp();
+                    });
+                    var wait = res.data.interval ? parseInt(res.data.interval) * 1000 : 1500;
+                    setTimeout(function () {
+                        if (res.data.redirect_url) {
+                            window.location.href = res.data.redirect_url;
+                        } else {
+                            $('#success-tip').slideUp();
+                        }
+                    }, wait);
+                } else {
+                    $('#error-tip .tip').html(res.message);
+                    $('#error-tip').slideDown();
+                    $('#error-tip .close').click(function () {
+                        $('#error-tip').slideUp();
+                    });
+                    var wait = res.data.interval ? parseInt(res.data.interval) * 1000 : 1500;
+                    setTimeout(function () {
+                        if (res.data.redirect_url) {
+                            window.location.href = res.data.redirect_url;
+                        } else {
+                            $('#error-tip').slideUp();
+                        }
+                    }, wait);
+                }
+            },
+            error: function () {
+                $('#error-tip .tip').html('request error');
+                $('#error-tip').slideDown();
+                $('#error-tip .close').click(function () {
+                    $('#error-tip').slideUp();
+                });
+            }
+        });
+
+        return false;
+    }
+</script>
+{% endblock %}
