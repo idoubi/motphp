@@ -49,7 +49,7 @@ class AdminBase extends Controller
 
     public function render(array $manifest)
     {
-        $layout = $manifest['layout'] ?: 'blank';
+        $layout = !empty($manifest['layout']) ? $manifest['layout'] : 'blank';
 
         if ($layout == 'form' && $this->request->isPost()) {
             return $this->handleSubmit($manifest);

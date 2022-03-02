@@ -79,8 +79,14 @@ class Handler
 
             if ($n == 2) {
                 $classArr[] = 'app';
-                $classArr[] = $v;
-                $classArr[] = 'controller';
+                if (defined('APP_MODE') && APP_MODE == 'single') {
+                    $classArr[] = 'controller';
+                    $classArr[] = $v;
+                } else {
+                    $classArr[] = $v;
+                    $classArr[] = 'controller';
+                }
+
                 continue;
             }
 

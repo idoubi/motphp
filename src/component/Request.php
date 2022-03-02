@@ -51,7 +51,7 @@ class Request
     public function __call($method, $arguments)
     {
         if (method_exists($this->innerRequest, $method)) {
-            return $this->innerRequest->$method($arguments);
+            return call_user_func_array([$this->innerRequest, $method], $arguments);
         }
 
         throw new \Exception('method not exists: ' . $method);

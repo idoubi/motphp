@@ -81,9 +81,11 @@ class DataModel
         if ($res) {
             $res = json_decode(json_encode($res), true);
             $res = $this->handleSubQuery($res);
+
+            return $res;
         }
 
-        return $res;
+        return [];
     }
 
     public function insertData(array $data): array

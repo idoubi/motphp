@@ -4,6 +4,7 @@ namespace mot\controller;
 
 use mot\component\Controller;
 use mot\handler\DataModel;
+use mot\handler\Validator;
 
 class ApiBase extends Controller
 {
@@ -15,6 +16,25 @@ class ApiBase extends Controller
     public function output($manifest = [])
     {
         $layout = !empty($manifest['layout']) ? $manifest['layout'] : 'stdout';
+
+        $params = $this->request->params();
+
+        if (!empty($manifest['params']) && is_array($manifest['params'])) {
+            try {
+                $paramFields = $manifest['params'];
+                $validator = new Validator($paramFields);
+                list($validateRes, $validateErrors) =  $validator->validateData($params);
+                if (!$validateRes) {
+                    foreach ($validateErrors as $v) {
+                        if ($v && count($v) > 0) {
+                            return $this->response->error($v[0]);
+                        }
+                    }
+                }
+            } catch (\Exception $e) {
+                return $this->response->error('validate error: ' . $e->getMessage());
+            }
+        }
 
         if (in_array($layout, ['json', 'stdout'])) {
             if (empty($manifest['data']) && !empty($manifest['data_query'])) {

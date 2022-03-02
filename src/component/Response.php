@@ -16,8 +16,14 @@ class Response
     {
     }
 
-    public function error($code, $msg)
+    public function success($msg, $data = null, $code = 0)
     {
+        return $this->stdout($code, $msg, $data);
+    }
+
+    public function error($msg, $code = -1)
+    {
+        return $this->stdout($code, $msg);
     }
 
     public function stdout($code, $msg = '', $data = null)

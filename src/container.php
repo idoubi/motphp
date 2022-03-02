@@ -12,7 +12,12 @@ use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 
 return [
     Configuration::class => function () {
-        return new Configuration(require ROOT_PATH . 'config/settings.php');
+        $settingsFile = ROOT_PATH . 'config/settings.php';
+        if (is_file($settingsFile)) {
+            return new Configuration(require $settingsFile);
+        }
+
+        return new Configuration([]);
     },
 
     Session::class => function (ContainerInterface $container) {
