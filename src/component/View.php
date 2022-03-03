@@ -26,6 +26,7 @@ class View
         'table_items' => [],
         'form_fields' => [],
         'form_data' => [],
+        'form_submit' => [],
         'card_items' => [],
         'paginate' => [],
         'login_fields' => [],

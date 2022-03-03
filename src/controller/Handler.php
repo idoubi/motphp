@@ -31,9 +31,13 @@ class Handler
             throw new \Exception('class not exists: ' . $class);
         }
 
-        $obj = new $class($this->container);
-        if (!method_exists($obj, $method)) {
+        if (!method_exists($class, $method)) {
             throw new \Exception('method not exists: ' . $class . ':' . $method);
+        }
+        $obj = new $class($this->container);
+
+        if (method_exists($obj, 'init')) {
+            $obj->init();
         }
 
         if (isset($obj->middleware) && is_array($obj->middleware)) {

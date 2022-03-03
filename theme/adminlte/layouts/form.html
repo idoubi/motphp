@@ -1,65 +1,90 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-<form method="{{ form_submit.method|default('post') }}" action="{{ form_submit.url }}" novalidate="novalidate">
-    <div class="card-body col-md-8">
+{% if form_submit or form_fields %}
+<form class="form-horizontal col-md-8" action="{{ form_submit.url }}" method="{{ form_submit.method|default('post') }}">
+    <div class="card-body">
         {% for field in form_fields %}
-        <div class="form-group">
-            <label for="">{{ field.title }}
+        <div class="form-group row" data-group="{{ field.group }}">
+            <label for="" class="col-sm-2 col-form-label">{{ field.title }}
                 {% if field.required %}
                 <span style="color: #dc3545;">*</span>
                 {% endif %}
             </label>
-            {% if field.type in ['email','number','password'] %}
-            <input type="{{ field.type }}" name="{{ field.name }}" class="form-control"
-                placeholder="{{ field.placeholder }}" value="{{ field.value }}">
+            <div class="col-sm-10">
+                {% if field.type in ['email','number','password', 'hidden'] %}
+                <input type="{{ field.type }}" name="{{ field.name }}" class="form-control"
+                    placeholder="{{ field.placeholder }}" value="{{ field.value }}">
 
-            {% elseif field.type == 'textarea' %}
-            <textarea name="{{ field.name }}" class="form-control" placeholder="{{ field.placeholder }}"
-                rows="{{ field.rows|default(6) }}">{{ field.value }}</textarea>
+                {% elseif field.type == 'textarea' %}
+                <textarea name="{{ field.name }}" class="form-control" placeholder="{{ field.placeholder }}"
+                    rows="{{ field.rows|default(6) }}">{{ field.value }}</textarea>
 
-            {% elseif field.type == 'radio' %}
-            <div class="form-group clearfix">
-                {% for k, v in field.options %}
-                <div class="icheck-primary d-inline">
-                    <input type="radio" id="" name="{{ field.name }}" value="{{ k }}"
-                        {% if field.value == k %}checked{% endif %}>
-                    <label for="">
-                        {{ v }}
-                    </label>
+                {% elseif field.type == 'radio' %}
+                <div class="form-group clearfix">
+                    {% for k, v in field.options %}
+                    <div class="icheck-primary d-inline">
+                        <input type="radio" name="{{ field.name }}" value="{{ k }}"
+                            {% if field.value == k %}checked{% endif %} {% if field.group_change %}
+                            data-group-name="{{ field.name }}_{{ k }}" {% endif %}>
+                        <label for="">
+                            {{ v }}
+                        </label>
+                    </div>
+                    &nbsp;
+                    {% endfor %}
                 </div>
-                &nbsp;
-                {% endfor %}
+
+                {% else %}
+                <input type="text" name="{{ field.name }}" class="form-control" id=""
+                    placeholder="{{ field.placeholder }}" value="{{ field.value }}">
+
+                {% endif %}
+                <div class="form-text">{{ field.tip|raw }}</div>
             </div>
-
-
-            {% else %}
-            <input type="text" name="{{ field.name }}" class="form-control" id="" placeholder="{{ field.placeholder }}"
-                value="{{ field.value }}">
-
-            {% endif %}
-            <div class="form-text">{{ field.tip|raw }}</div>
         </div>
         {% endfor %}
-
     </div>
 
     <div class="card-footer">
         <button type="submit" class="btn btn-primary ajax-post">提交</button>
     </div>
+
 </form>
+{% endif %}
 {% endblock %}
 
 {% block script %}
 <script>
+    changeGroup();
+
     $('.icheck-primary').on('click', function () {
         var input = $(this).find('input');
         var name = input.attr('name');
         $('input[name="' + name + '"]').removeAttr('checked');
         input.attr('checked', true);
+
+        changeGroup();
     });
 
     $('.ajax-post').on('click', submit);
+
+    function changeGroup() {
+        var groupNames = $('[data-group-name]');
+        if (groupNames.length > 0) {
+            groupNames.map(function (k, v) {
+                var groupName = $(v).attr('data-group-name');
+                var checked = $(v).attr('checked');
+                var groupFields = $('[data-group="' + groupName + '"]');
+                if (!checked) {
+                    console.log(groupName)
+                    groupFields.hide();
+                } else {
+                    groupFields.show();
+                }
+            })
+        }
+    }
 
     function submit() {
         var data = $('form').serialize();

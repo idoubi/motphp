@@ -154,6 +154,7 @@ class AdminBase extends Controller
         $act = $formSubmit['act'];
 
         try {
+            $this->filterGroupFields($formFields, $params);
             $validator = new Validator($formFields);
             list($validateRes, $validateErrors) =  $validator->validateData($params);
             if (!$validateRes) {
@@ -225,5 +226,28 @@ class AdminBase extends Controller
         }
 
         return $this->success($successMessage, $successUrl);
+    }
+
+    private function filterGroupFields(&$fields, &$params)
+    {
+        $groupNames = [];
+        foreach ($fields as $k => $field) {
+            if (empty($field['name']) || empty($field['group_change']) || empty($params[$field['name']])) {
+                continue;
+            }
+
+            $groupNames[] = sprintf('%s_%s', $field['name'], $params[$field['name']]);
+        }
+
+        foreach ($fields as $k => $field) {
+            if (empty($field['name']) || empty($field['group'])) {
+                continue;
+            }
+
+            if (!in_array($field['group'], $groupNames)) {
+                unset($fields[$k]);
+                unset($params[$field['name']]);
+            }
+        }
     }
 }

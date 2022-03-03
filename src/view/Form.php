@@ -24,6 +24,11 @@ class Form extends View
         }
     }
 
+    public function setFormSubmit($submit = [])
+    {
+        $this->vars['form_submit'] = $submit;
+    }
+
     public function parse($manifest = [])
     {
         parent::parse($manifest);
@@ -33,6 +38,9 @@ class Form extends View
         }
         if (isset($manifest['form_data'])) {
             $this->setFormData($manifest['form_data']);
+        }
+        if (isset($manifest['form_submit'])) {
+            $this->setFormSubmit($manifest['form_submit']);
         }
     }
 }
