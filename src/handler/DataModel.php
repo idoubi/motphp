@@ -7,16 +7,26 @@ class DataModel
     protected $manifest;
     protected $handler;
 
-    public function __construct(array $manifest)
+    public function __construct(array $manifest, $db = null)
     {
-        if (empty($manifest['model'])) {
-            throw new \Exception('invalid model');
+        if (empty($manifest['model']) && empty($manifest['table'])) {
+            throw new \Exception('invalid orm object');
         }
 
-        if (is_string($manifest['model'])) {
-            $handler = model($manifest['model']);
-        } else {
-            $handler = $manifest['model'];
+        $handler = null;
+
+        if ($manifest['model']) {
+            // create orm with model
+            if (is_string($manifest['model'])) {
+                $handler = model($manifest['model']);
+            } elseif (is_object($manifest['model'])) {
+                $handler = $manifest['model'];
+            }
+        } elseif ($manifest['table'] && $db) {
+            // create orm with table
+            if (is_string($manifest['table'])) {
+                $handler = $db->table($manifest['table']);
+            }
         }
 
         if (!$handler || !is_object($handler)) {
@@ -81,6 +91,12 @@ class DataModel
         if ($res) {
             $res = json_decode(json_encode($res), true);
             $res = $this->handleSubQuery($res);
+            if (!empty($this->manifest['after_handler']) && is_callable($this->manifest['after_handler'])) {
+                $newRes = $this->manifest['after_handler']($res);
+                if ($newRes) {
+                    $res = $newRes;
+                }
+            }
 
             return $res;
         }
@@ -126,13 +142,14 @@ class DataModel
                     if (!$field || !is_string($field)) {
                         continue;
                     }
-                    if (!$subField || !is_string($subField)) {
+                    if (!is_string($subField)) {
                         $subField = $field;
                     }
-                    if (!isset($v[$field])) {
+                    if (!isset($data[$field])) {
                         continue;
                     }
-                    $handler = $handler->where($subField, $v[$field]);
+
+                    $handler = $handler->where($subField, $data[$field]);
                 }
             }
 
@@ -144,7 +161,10 @@ class DataModel
 
             $res = $res ? $res->toArray() : [];
             if (!empty($query['after_handler']) && is_callable($query['after_handler'])) {
-                $query['after_handler']($res);
+                $newRes = $query['after_handler']($res);
+                if ($newRes) {
+                    $res = $newRes;
+                }
             }
             $data[$column] = $res;
         }

@@ -21,6 +21,7 @@ class View
         'sidenav' => [],
         'tabnav' => [],
         'crumb' => [],
+        'tip' => [],
         'toolbar' => [],
         'table_columns' => [],
         'table_items' => [],
@@ -93,6 +94,9 @@ class View
         if (isset($manifest['crumb'])) {
             $this->setCrumb($manifest['crumb']);
         }
+        if (isset($manifest['tip'])) {
+            $this->setTip($manifest['tip']);
+        }
         if (isset($manifest['toolbar'])) {
             $this->setToolbar($manifest['toolbar']);
         }
@@ -149,6 +153,16 @@ class View
     public function setCrumb($crumb = [])
     {
         $this->vars['crumb'] = $crumb;
+    }
+
+    public function setTip($tip = [])
+    {
+        if (is_string($tip)) {
+            $tip = [
+                'content' => $tip
+            ];
+        }
+        $this->vars['tip'] = $tip;
     }
 
     public function setToolbar($toolbar = [])

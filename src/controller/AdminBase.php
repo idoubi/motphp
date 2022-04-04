@@ -64,7 +64,7 @@ class AdminBase extends Controller
 
         if ($layout == 'table' && !isset($manifest['table_items']) && isset($manifest['table_query'])) {
             try {
-                $model = new DataModel($manifest['table_query']);
+                $model = new DataModel($manifest['table_query'], $this->db);
                 list($manifest['table_items'], $manifest['paginate']) = $model->getPagedData($this->path, $this->request->params());
             } catch (\Exception $e) {
             }
@@ -72,7 +72,7 @@ class AdminBase extends Controller
 
         if ($layout == 'form' && !isset($manifest['form_data']) && isset($manifest['form_query'])) {
             try {
-                $model = new DataModel($manifest['form_query']);
+                $model = new DataModel($manifest['form_query'], $this->db);
                 $manifest['form_data'] = $model->findFirstData();
             } catch (\Exception $e) {
             }
@@ -80,7 +80,7 @@ class AdminBase extends Controller
 
         if ($layout == 'card' && !isset($manifest['card_items']) && isset($manifest['card_query'])) {
             try {
-                $model = new DataModel($manifest['card_query']);
+                $model = new DataModel($manifest['card_query'], $this->db);
                 list($items, $manifest['paginate']) = $model->getPagedData($this->path, $this->request->params());
                 if (isset($manifest['card_map']) && is_callable($manifest['card_map'])) {
                     $cardItems = [];
@@ -190,7 +190,7 @@ class AdminBase extends Controller
             }
         }
 
-        $model = new DataModel($formSubmit);
+        $model = new DataModel($formSubmit, $this->db);
 
         if ($act == 'insert') {
             try {

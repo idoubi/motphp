@@ -30,8 +30,8 @@
                                 class="badge bg-{{ column.label.class|default('primary') }}">{{ column.content }}</span>
 
                             {% elseif column.type == 'image' %}
-                            <img src="{{ column.content|default(column.placeholder) }}" class="img-fluid mb-2"
-                                width="{{ column.image.width|default(100) }}"
+                            <img src="{{ column.content|default('/static/img/default-150x150.png') }}"
+                                class="img-fluid mb-2" width="{{ column.image.width|default(100) }}"
                                 height="{{ column.image.height|default('100') }}" style="{{ column.style }}" />
 
                             {% elseif column.type == 'toolbar' %}

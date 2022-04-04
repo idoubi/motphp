@@ -44,8 +44,24 @@ class Request
     {
         $queryParams = $this->innerRequest->getQueryParams() ?: [];
         $bodyParams = $this->innerRequest->getParsedBody() ?: [];
+        $jsonParams = $this->json() ?: [];
 
-        return array_merge($queryParams, $bodyParams);
+        return array_merge($queryParams, $bodyParams, $jsonParams);
+    }
+
+    public function form()
+    {
+        return $this->innerRequest->getParsedBody();
+    }
+
+    public function json()
+    {
+        return json_decode($this->contents(), true);
+    }
+
+    public function contents()
+    {
+        return $this->innerRequest->getBody()->getContents();
     }
 
     public function __call($method, $arguments)

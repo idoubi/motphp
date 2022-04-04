@@ -5,6 +5,13 @@ function datetime(int $timestamp): string
     return date('Y-m-d H:i:s', intval($timestamp));
 }
 
+function genOrderid($prefix = '')
+{
+    $orderid = date('YmdHis') . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
+
+    return sprintf("%s%s", $prefix, $orderid);
+}
+
 function nonceStr(int $len = 32): string
 {
     $str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
