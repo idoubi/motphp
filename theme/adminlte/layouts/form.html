@@ -35,6 +35,20 @@
                     {% endfor %}
                 </div>
 
+                {% elseif field.type == 'group_radio' %}
+                <div class="form-group clearfix">
+                    {% for k, v in field.options %}
+                    <div class="icheck-primary d-inline">
+                        <input type="radio" name="{{ field.name }}" value="{{ k }}"
+                            {% if field.value == k %}checked{% endif %} data-group-name="{{ field.name }}_{{ k }}">
+                        <label for="">
+                            {{ v }}
+                        </label>
+                    </div>
+                    &nbsp;
+                    {% endfor %}
+                </div>
+
                 {% else %}
                 <input type="text" name="{{ field.name }}" class="form-control" id=""
                     placeholder="{{ field.placeholder }}" value="{{ field.value }}">

@@ -31,6 +31,9 @@ class Table extends View
                     $columns[] = array_merge($column, $column['handler']($item));
                     continue;
                 }
+                if (isset($column['callback']) && is_callable($column['callback'])) {
+                    $column['content'] = $column['callback']($item);
+                }
                 if (isset($column['format']) && is_callable($column['format'])) {
                     $column['content'] = $column['format']($column['content']);
                 }
