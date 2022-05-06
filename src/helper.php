@@ -1,5 +1,39 @@
 <?php
 
+use DI\ContainerBuilder;
+use Slim\App;
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+function getContainer()
+{
+    $containerBuilder = new ContainerBuilder();
+    $containerBuilder->addDefinitions(__DIR__ . '/container.php');
+    $container = $containerBuilder->build();
+
+    return $container;
+}
+
+function getApp()
+{
+    $app = getContainer()->get(App::class);
+
+    return $app;
+}
+
+function getRequest()
+{
+    $request = getApp()->request;
+
+    return $request;
+}
+
+function getDb()
+{
+    $db = getContainer()->get(Capsule::class);
+
+    return $db;
+}
+
 function datetime(int $timestamp): string
 {
     return date('Y-m-d H:i:s', intval($timestamp));
@@ -88,46 +122,90 @@ if (!function_exists('model')) {
             return new $class();
         }
 
-        return null;
+        // auto build table name
+        $tableName = str_replace('/', '_', strtolower($path));
+
+        return getDb()->table($tableName);
     }
 }
 
 
-// function url($path, $params = [])
-// {
-//     if (stripos($path, '/') === 0) {
-//         $url = $path;
-//         if ($params && is_array($params)) {
-//             $url .= '?' . http_build_query($params);
-//         }
+function url($path, $params = [])
+{
+    $request = getRequest();
+    $uri = $request->getUri();
+    $path = $uri->getPath();
+    $query = $uri->getQuery();
+    $pathArr = array_filter(explode('/', $path));
+    $n = 0;
+    $c = count($pathArr);
+    $modArr = [];
+    $nodeArr = [];
 
-//         return $url;
-//     }
+    $app = '';
+    $module = '';
+    $controller = '';
+    $action = '';
 
-//     $pathArr = explode('/', $path);
-//     if (!$pathArr) {
-//         return '';
-//     }
+    foreach ($pathArr as $v) {
+        $n++;
+        if ($n == 1) {
+            $app = $v;
+            continue;
+        }
+        $nodeArr[] = $v;
+        if ($n == $c - 1) {
+            $controller = $v;
+            continue;
+        }
+        if ($n == $c) {
+            $action = $v;
+            continue;
+        }
 
-//     $c = count($pathArr);
-//     $urlArr = $pathArr;
+        $modArr[] = $v;
+    }
 
-//     if ($c == 1) {
-//         $urlArr = [$this->app, $this->module, $this->controller, $pathArr[0]];
-//     }
+    $fullpath = $path;
+    if ($query) {
+        $fullpath .= '?' . $query;
+    }
+    $module = implode('/', $modArr);
+    $node = implode('/', $nodeArr);
 
-//     if ($c == 2) {
-//         $urlArr = [$this->app, $this->module, ...$pathArr];
-//     }
+    if (stripos($path, '/') === 0) {
+        $url = $path;
+        if ($params && is_array($params)) {
+            $url .= '?' . http_build_query($params);
+        }
 
-//     if ($c == 3) {
-//         $urlArr = [$this->app, ...$pathArr];
-//     }
+        return $url;
+    }
 
-//     $url = '/' . implode('/', $urlArr);
-//     if ($params && is_array($params)) {
-//         $url .= '?' . http_build_query($params);
-//     }
+    $pathArr = explode('/', $path);
+    if (!$pathArr) {
+        return '';
+    }
 
-//     return $url;
-// }
+    $c = count($pathArr);
+    $urlArr = $pathArr;
+
+    if ($c == 1) {
+        $urlArr = [$app, $module, $controller, $pathArr[0]];
+    }
+
+    if ($c == 2) {
+        $urlArr = [$app, $module, ...$pathArr];
+    }
+
+    if ($c == 3) {
+        $urlArr = [$app, ...$pathArr];
+    }
+
+    $url = '/' . implode('/', $urlArr);
+    if ($params && is_array($params)) {
+        $url .= '?' . http_build_query($params);
+    }
+
+    return $url;
+}
