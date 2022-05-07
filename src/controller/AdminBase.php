@@ -67,6 +67,7 @@ class AdminBase extends Controller
                 $model = new DataModel($manifest['table_query'], $this->db);
                 list($manifest['table_items'], $manifest['paginate']) = $model->getPagedData($this->path, $this->request->params());
             } catch (\Exception $e) {
+                var_dump($e->getMessage());
             }
         }
 
@@ -75,6 +76,7 @@ class AdminBase extends Controller
                 $model = new DataModel($manifest['form_query'], $this->db);
                 $manifest['form_data'] = $model->findFirstData();
             } catch (\Exception $e) {
+                var_dump($e->getMessage());
             }
         }
 

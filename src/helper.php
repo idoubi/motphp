@@ -34,9 +34,13 @@ function getDb()
     return $db;
 }
 
-function datetime(int $timestamp): string
+function datetime($timestamp): string
 {
-    return date('Y-m-d H:i:s', intval($timestamp));
+    if (is_string($timestamp)) {
+        $timestamp = strtotime($timestamp);
+    }
+
+    return date('Y-m-d H:i:s', $timestamp);
 }
 
 function genOrderid($prefix = '')
