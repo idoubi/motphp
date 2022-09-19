@@ -7,9 +7,9 @@ use mot\trait\SoftDeletes;
 
 class Model extends ModelBase
 {
-    use SoftDeletes;
+    // use SoftDeletes;
 
     protected $guarded = [];
-    public $timestamps = true;
+    public $timestamps = false;
     protected $dateFormat = 'U';
 }

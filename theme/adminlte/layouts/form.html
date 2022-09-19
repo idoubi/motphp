@@ -14,11 +14,11 @@
             <div class="col-sm-10">
                 {% if field.type in ['email','number','password', 'hidden'] %}
                 <input type="{{ field.type }}" name="{{ field.name }}" class="form-control"
-                    placeholder="{{ field.placeholder }}" value="{{ field.value }}">
+                    placeholder="{{ field.placeholder }}" value="{{ field.value }}" {{ field.attr }}>
 
                 {% elseif field.type == 'textarea' %}
                 <textarea name="{{ field.name }}" class="form-control" placeholder="{{ field.placeholder }}"
-                    rows="{{ field.rows|default(6) }}">{{ field.value }}</textarea>
+                    rows="{{ field.rows|default(6) }}" {{ field.attr }}>{{ field.value }}</textarea>
 
                 {% elseif field.type == 'radio' %}
                 <div class="form-group clearfix">
@@ -51,7 +51,7 @@
 
                 {% else %}
                 <input type="text" name="{{ field.name }}" class="form-control" id=""
-                    placeholder="{{ field.placeholder }}" value="{{ field.value }}">
+                    placeholder="{{ field.placeholder }}" value="{{ field.value }}" {{ field.attr }}>
 
                 {% endif %}
                 <div class="form-text">{{ field.tip|raw }}</div>

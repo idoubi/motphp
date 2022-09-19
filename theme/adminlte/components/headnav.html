@@ -4,7 +4,7 @@
     </li>
     {% for nav in headnav %}
     <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ nav.url | default('javascript:;') }}" class="nav-link">{{ nav.title }}</a>
+        <a href="{{ nav.url | default('javascript:;') }}" class="nav-link"><i class="{{ nav.icon }}"></i>&nbsp;&nbsp;{{ nav.title }}</a>
     </li>
     {% endfor %}
 </ul>
