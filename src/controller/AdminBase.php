@@ -114,6 +114,9 @@ class AdminBase extends Controller
         if (isset($this->title)) {
             $view->setTitle($this->title);
         }
+        if (isset($this->gobackUrl)) {
+            $view->setGobackUrl($this->gobackUrl);
+        }
         if (isset($this->logo)) {
             $view->setLogo($this->logo);
         }

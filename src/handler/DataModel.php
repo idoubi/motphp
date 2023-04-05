@@ -215,7 +215,8 @@ class DataModel
                     'not in' => 'whereNotIn',
                 ];
                 if (isset($extra[$value[0]])) {
-                    $handler = $handler->$extra[$value[0]]($field, $value[1]);
+                    $method = $extra[$value[0]];
+                    $handler = $handler->$method($field, $value[1]);
                     continue;
                 }
                 if ($value[0] == 'not' && is_null($value[1])) {

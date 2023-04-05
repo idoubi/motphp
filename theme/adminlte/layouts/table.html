@@ -36,8 +36,8 @@
 
                             {% elseif column.type == 'toolbar' %}
                             {% for item in column.options %}
-                            <a class="btn btn-{{ item.class|default('primary') }} btn-sm"
-                                href="{{ item.url|default('javascript:;') }}">
+                            <a style="margin: 5px" class="btn btn-{{ item.class|default('primary') }} btn-sm"
+                                href="{{ item.url|default('javascript:;') }}" {{ item.attr }}>
                                 <i class="fa fa-{{ item.icon|default('') }}">
                                 </i>
                                 {{ item.title }}
