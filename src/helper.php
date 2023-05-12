@@ -111,14 +111,18 @@ if (!function_exists('model')) {
         $pathArr = explode('/', $path);
         $pathArr = array_filter($pathArr);
 
-        if (!$pathArr || count($pathArr) < 2) {
+        if (!$pathArr || count($pathArr) < 1) {
             return null;
         }
 
         $classArr = $pathArr;
 
-        array_unshift($classArr, '\app');
-        array_splice($classArr, 2, 0, 'model');
+        if (APP_MODE == 'single') {
+            array_unshift($classArr, '\app\model');
+        } else {
+            array_unshift($classArr, '\app');
+            array_splice($classArr, 2, 0, 'model');
+        }
 
         $class = implode('\\', $classArr);
 
